@@ -1,0 +1,18 @@
+networks:
+    adrianoff_php_net:
+        driver: bridge
+
+services:
+    adrianoff_php_service:
+          build:
+              context: .
+              dockerfile: ./php7.3-fpm/Dockerfile
+          container_name: adrianoff_php_container
+          networks:
+              - adrianoff_php_net
+          volumes:
+              - ../src:/var/www/temp
+              - ./php7.3-fpm/php.ini:/etc/php/7.3/fpm/conf.d/90-tc.ini
+              - ./php7.3-fpm/php.ini:/etc/php/7.3/cli/conf.d/90-tc.ini
+version: '2'
+volumes: {}
